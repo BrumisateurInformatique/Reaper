@@ -1,0 +1,23 @@
+--user input dialog
+dialog_name = "Heure de fin"
+howmanyfields = 2
+field_names = "HH:MM"
+default_values = "00"
+maxreturnlength = 2 
+
+Heure=os.date("%H")
+Minutes=os.date("%M")
+
+
+User_Input = reaper.GetUserInputs(dialog_name,howmanyfields, field_names, default_values, maxreturnlength)
+
+if User_Input == true then --checking if ok was clicked
+                       
+  UserValues = User_Input[4].split(',') 
+  StoppingTime = int(UserValues[0])
+  StoppingMin = int(UserValues[1])
+  end
+if Heure==StoppingTime and Minutes==StoppingMin then
+  reaper.OnStopButton()
+  reaper.Main_SaveProject(0,0)
+end  
